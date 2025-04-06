@@ -1,0 +1,31 @@
+
+
+
+
+# Node.js / React (react-frontend with Vite)
+react-frontend/node_modules/
+react-frontend/dist/          # Vite build output
+react-frontend/dist-ssr/      # Vite SSR build output (if applicable)
+react-frontend/.env           # Environment variables
+react-frontend/*.log          # Log files
+react-frontend/npm-debug.log*
+
+# Java (backend)
+backend/target/          # Maven build output
+backend/*.class          # Compiled Java class files
+backend/.idea/           # IntelliJ IDEA files
+backend/*.iml            # IntelliJ module files
+backend/out/             # IntelliJ build output
+backend/*.log            # Log files
+
+# General
+*.DS_Store               # macOS system files
+*.swp                    # Vim swap files
+*.bak                    # Backup files
+*.tmp                    # Temporary files
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
