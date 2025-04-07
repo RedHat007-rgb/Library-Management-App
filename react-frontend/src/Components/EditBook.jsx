@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const EditBook = () => {
+
+  const inputRef=useRef(null);
+  useEffect(()=>{
+    inputRef.current.focus();
+  },[])
+
   return (
     <div>
-      Edit book
+     <form>
+      <label>
+        Title:
+        <input ref={inputRef}   placeholder='Enter the title'></input>
+      </label>
+      <button>Search</button>
+     </form>
     </div>
   )
 }
