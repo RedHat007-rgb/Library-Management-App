@@ -1,15 +1,18 @@
-import React from 'react'
-import Header from './Header'
-import { Link, Outlet } from 'react-router-dom'
-import Footer from './Footer'
+import React, { useContext } from "react";
+import { LibraryContext } from "../context";
 
 const Home = () => {
+  const { list } = useContext(LibraryContext);
+
   return (
     <div>
-        Home
-      
+      <div>
+        {list?.map((book) => (
+          <h1 key={book.ISBN}>{book.title}</h1>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

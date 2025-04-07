@@ -1,32 +1,62 @@
-import React, { useEffect, useRef } from 'react'
+import axios from "axios";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { LibraryContext } from "../context";
 
 const AddBook = () => {
-  const inputRef=useRef(null);
+  const { setError, error, loading, isLoading } = useContext(LibraryContext);
+  const [data, setdata] = useState("");
+  const titleRef = useRef(null);
+  const authorRef = useRef(null);
+  const isbnRef = useRef(null);
 
- useEffect(()=>{
-  inputRef.current.focus();
- },[])
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
 
- 
+  const addBook = async (e) => {
+    e.preventDefault();
+    isLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:8080/create", {
+        title: titleRef.current.value,
+        author: authorRef.current.value,
+        isbn: isbnRef.current.value,
+      });
+
+      setdata(response.data);
+
+      titleRef.current.value = "";
+      authorRef.current.value = "";
+      isbnRef.current.value = "";
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      isLoading(false);
+    }
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={addBook}>
         <label>
           Title:
-          <input ref={inputRef} placeholder='Enter the Title:'></input>
+          <input ref={titleRef} placeholder="Enter the Title:" type="text" />
         </label>
         <label>
           Author:
-          <input placeholder='Enter the Author:'></input>
+          <input ref={authorRef} placeholder="Enter the Author:" type="text" />
         </label>
         <label>
           ISBN:
-          <input placeholder='Enter the ISBN:'></input>
+          <input ref={isbnRef} placeholder="Enter the ISBN:" type="text" />
         </label>
-        <button >Add Book</button>
+        <button type="submit">Add Book</button>
       </form>
-    </div>
-  )
-}
 
-export default AddBook
+      {loading ? "Loading...." : error ? error : data}
+    </div>
+  );
+};
+
+export default AddBook;

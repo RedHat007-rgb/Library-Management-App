@@ -4,11 +4,11 @@ const Header = () => {
   return (
     <div
       style={{
-        height: "80px", // Flatter header is more modern than 20vh
+        height: "80px", 
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        background: "linear-gradient(135deg, #1e3c72, #2a5298)", // Subtle gradient
+        background: "linear-gradient(135deg, #1e3c72, #2a5298)", 
         padding: "0 40px", // More generous padding
         boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)", // Softer shadow
         position: "sticky", // Sticky header is common in modern UIs

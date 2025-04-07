@@ -1,16 +1,46 @@
-import React from 'react'
-import Header from './Header'
-import { Link, Outlet } from 'react-router-dom'
-import Footer from './Footer'
+import Header from "./Header";
+import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
+import { useEffect, useState } from "react";
+import { LibraryContext } from "../context";
 
 const Layout = () => {
-  return (
-    <div >
-      <Header />
-        <Outlet/>
-      <Footer/> 
-    </div>
-  )
-}
+  const [list, setList] = useState([]);
+  const [loading, isLoading] = useState(false);
+  const [error, setError] = useState("");
 
-export default Layout
+  useEffect(() => {
+    getBooks();
+  }, []);
+
+  const getBooks = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/");
+      const data = await response.json();
+
+      setList(data);
+    } catch {
+      setError("Error while fetching bOOks from library");
+    }
+  };
+
+  return (
+    <div>
+      <LibraryContext.Provider
+        value={{
+          list: list,
+          isLoading: isLoading,
+          loading: loading,
+          error: error,
+          setList: setList,
+        }}
+      >
+        <Header />
+        <Outlet />
+        <Footer />
+      </LibraryContext.Provider>
+    </div>
+  );
+};
+
+export default Layout;
