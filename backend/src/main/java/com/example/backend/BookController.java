@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping()
 public class BookController {
 
     private BookService bookService;
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<Book> getallBooks(){
          return bookService.getAllBooks();
 
